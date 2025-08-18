@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../shared/assets/fonts/fonts.css">
+	<link rel="stylesheet" type="text/css" href="../shared/assets/reset.css">
+	<link rel="stylesheet" type="text/css" href="../shared/assets/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="vars.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+
+	<script defer type="text/javascript" src="../shared/libs/jquery.min.js"></script>
+	<script defer type="text/javascript" src="../shared/libs/jquery.marquee.min.js"></script>
+	<script defer type="text/javascript" src="../shared/libs/vibrant.min.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="cell" id="miscInfoCell">
+			<div id="diffWrap" style="display: none;">
+				<div id="diff">Normal</div>
+			</div>
+
+			<div id="codeWrap" style="display: none;">
+				<div>!srxd </div><div id="spinShareKey">12345</div>
+			</div>
+
+			<div id="timeWrap">
+				<i class="fas fa-clock fa-fw"></i>
+				<span id="time">0:00</span>
+				<span id="duration">0:00</span>
+			</div>
+		</div>
+
+		<div class="cell" id="qrCell">
+			<div id="qrWrapper" class="showBoxShadow">
+				<img id="qr"/>
+			</div>
+		</div>
+
+		<div class="cell" id="artCell">
+			<div id="artWrapper">
+				<div id="artOutline">
+					<div class="artContainer"></div>
+				</div>
+				<div id="healthOutline">
+				</div>
+				<div id="skullIcon">
+					<i class="fa-solid fa-face-dizzy"></i>
+				</div>
+				<div id="artBG" class="showBoxShadow">
+					<div class="artContainer"></div>
+				</div>
+				<img id="art" src="placeholder.png"/>
+			</div>
+		</div>
+
+		<div class="cell" id="metadataCell">
+			<div id="title">
+				<span id="titleString">Song Title</span>
+			</div>
+			<div id="secondaryWrap">
+				<div id="secondary">
+					<div id="artist">Song Artist</div>
+					<div id="mapperContainer">
+						<div class="mapper">Map Author</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="cell" id="hitMissCell">
+			<div id="hitCell">
+				<i class="fa-fw fas fa-check"></i>
+				<span id="hitValue">0</span>
+			</div>
+
+			<div id="PFCCell">
+				<i class="fa-fw fas fa-star"></i>
+				<span>PFC</span>
+			</div>
+			<div id="FCCell">
+				<i class="fa-fw fas fa-star"></i>
+				<span>FC</span>
+			</div>
+
+			<div id="missCell">
+				<i class="fa-fw fas fa-times"></i>
+				<span id="missValue">0</span>
+			</div>
+		</div>
+
+		<!--<div class="cell" id="accCell">
+			<div id="comboWrap">
+				<i class="fa-fw fas fa-link"></i>
+				<span id="combo">0</span>
+			</div>
+
+			<div id="accWrap">
+				<span id="acc">97.81</span><span class="accPerc">%</span>
+			</div>
+		</div>-->
+
+		<div class="cell" id="scoreCell">
+			<div id="comboWrap">
+				<i class="fa-fw fas fa-link"></i>
+				<span id="combo">0</span>
+			</div>
+
+			<div id="scoreWrap">
+				<span id="score">14,523</span>
+			</div>
+		</div>
+
+		<!--<div class="cell" id="pbCell">
+			<div class="basicHeader">
+				<span id="pbHeaderText">PB</span>
+				<i class="fas fa-globe"></i>
+				<div id="blAvatar" style="display: none;"></div>
+				<div id="blIcon" style="display: none;"></div>
+				<span id="pbRankSymbol">#</span>
+				<span id="pbRankValue">2463</span>
+				<span id="pbModifiers">FS</span>
+			</div>
+			<div id="pbAccWrap">
+				<span id="pbAcc">--.--</span><span class="accPerc">%</span>
+			</div>
+		</div>-->
+
+		<div id="bgWrapper">
+			<div id="artBGWrap">
+				<div class="artContainer"></div>
+			</div>
+		</div>
+
+		<img id="artDoppleganger" src="placeholder.png"/>
+	</div>
+
+	<div id="filterWrapper">
+		<svg xmlns="http://www.w3.org/2000/svg">
+			<filter id="outlineEffect" color-interpolation-filters="sRGB">
+				<feConvolveMatrix in="SourceAlpha" result="OutlineAlpha" divisor="1" order="1,1" kernelMatrix="1"/>
+				<feFlood flood-color="var(--overlayOutlineColor)" result="OutlineColor" />
+				<feComposite in="OutlineColor" in2="OutlineAlpha" operator="in" result="Outline" />
+
+				<feMerge>
+					<feMergeNode in="Outline"/>
+					<feMergeNode in="SourceGraphic"/>
+				</feMerge>
+			</filter>
+
+			<filter id="shadowEffect" color-interpolation-filters="sRGB">
+				<feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="var(--overlayShadowColor)"/>
+			</filter>
+
+			<filter id="handsFlashEffectLeft" color-interpolation-filters="sRGB">
+				<feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="var(--handsLeftColor)"/>
+				<feComponentTransfer>
+					<feFuncR type="linear" slope="1" intercept="0.1"></feFuncR>
+					<feFuncG type="linear" slope="1" intercept="0.1"></feFuncG>
+					<feFuncB type="linear" slope="1" intercept="0.1"></feFuncB>
+				</feComponentTransfer>
+			</filter>
+			<filter id="handsFlashEffectRight" color-interpolation-filters="sRGB">
+				<feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="var(--handsRightColor)"/>
+				<feComponentTransfer>
+					<feFuncR type="linear" slope="1" intercept="0.1"></feFuncR>
+					<feFuncG type="linear" slope="1" intercept="0.1"></feFuncG>
+					<feFuncB type="linear" slope="1" intercept="0.1"></feFuncB>
+				</feComponentTransfer>
+			</filter>
+
+			<filter id="blankEffect"></filter>
+		</svg>
+	</div>
+
+	<script defer type="text/javascript" src="funcs.js"></script>
+	<script defer type="text/javascript" src="settings.js"></script>
+	<script defer type="text/javascript" src="main.js"></script>
+	<script defer type="text/javascript" src="broadcast.js"></script>
+	<!--<script defer type="text/javascript" src="personal_best.js"></script>-->
+	<script defer type="text/javascript" src="../shared/libs/bg_settings.js"></script>
+	<script type="text/javascript">
+		window.addEventListener("load", async function() {
+			changeMiscInfoDisplay();
+
+			postToSettingsEventChannel("SRXDOverlayExists", {version: overlayRevision});
+			rootCSS().setProperty("--background-art-height", `${$("#wrapper").outerHeight(true)}px`);
+		});
+	</script>
+</body>
+
+</html>

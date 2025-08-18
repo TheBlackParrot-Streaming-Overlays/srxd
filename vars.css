@@ -1,0 +1,219 @@
+:root {
+	--currentProgressAngle: 0deg;
+	--currentHealthAngle: 135deg;
+
+	--colorDark: #000000;
+	--colorLight: #A695FF;
+
+	--overlayHeight: 56px;
+	--overlayMarginVertical: 12px;
+	--overlayMarginHorizontal: 12px;
+
+	--elementSpacing: 12px;
+	--verticalSpacing: 2px;
+
+	--primaryFontSize: 12pt;
+	--primaryFontWeight: 900;
+
+	--miscInfoWidth: 120px;
+	--miscInfoFontSize: 14pt;
+	--miscInfoVerticalAlignment: column;
+	--miscInfoColor: #FFFFFFFF;
+	--miscInfoFontFamily: "Manrope";
+	--miscInfoFontStyle: normal;
+	--miscInfoAlignment: center;
+	--miscInfoFontWeight: 900;
+	--miscInfoTopAdditionalFontWeight: 0px;
+	--miscInfoBottomAdditionalFontWeight: 0px;
+	--miscInfoLineHeight: 22px;
+
+	--timeFontSize: 12pt;
+
+	--hitMissFontFamily: "Manrope";
+	--hitMissFontStyle: normal;
+	--hitMissFontWeight: 900;
+	--hitMissFontSize: 12pt;
+	--hitMissWidth: 80px;
+	--hitMissVerticalAlignment: column;
+	--hitMissColor: #FFFFFFFF;
+	--hitIconColor: #33AA55FF;
+	--missIconColor: #DD1133FF;
+	--PFCIconColor: #20D7FFFF;
+	--FCIconColor: #33FF00FF;
+	--hitMissAlignment: left;
+	--hitMissAlignmentDirection: ltr;
+	--hitMissFontAdditionalWeight: 0px;
+	--hitMissLineHeight: 22px;
+	
+	--scoreColor: #FFFFFFFF;
+	--scoreFontFamily: "Manrope";
+	--scoreFontStyle: normal;
+	--scoreFontAdditionalWeight: 0px;
+	--scoreWidth: 120px;
+	--scoreFontSize: 27pt;
+	--scoreCharacterSpacing: -1px;
+	--scoreFontWeight: 900;
+	--scoreVerticalAlignment: column;
+	--scoreAlignment: center;
+	--scoreLineHeight: 22px;
+	--scoreVerticalOffset: -1px;
+
+	--comboColor: #FFFFFFFF;
+	--comboFontFamily: "Manrope";
+	--comboFontStyle: normal;
+	--comboFontSize: 12pt;
+	--comboFontWeight: 900;
+	--comboFontAdditionalWeight: 0px;
+	--comboAlignmentDirection: ltr;
+	--comboVerticalAlignment: start;
+
+	--metadataLineHeight: 24px;
+	--fixWeirdMetadataAlignmentIssue: 1px;
+	--metadataVerticalAlignment: column;
+	--metadataAlignment: start;
+	--metadataLineHeight: 22px;
+
+	--titleFontSize: 19pt;
+	--titleFontWeight: 900;
+	--titleAdditionalWeight: 0.2px;
+	--titleFontFamily: "Manrope";
+	--titleTransform: none;
+	--titleColor: #FFFFFFFF;
+	--titleFontStyle: normal;
+	--titleAlignment: var(--metadataAlignment);
+
+	--secondaryFontFamily: "Manrope";
+	--secondaryAdditionalWeight: 0px;
+	--secondaryTransform: none;
+	--secondaryFontStyle: normal;
+	--secondaryColorStatic: "#AAAAAAFF";
+	--secondaryColor: var(--colorLight);
+	--secondaryFontSize: 12pt;
+	--secondaryFontWeight: 700;
+	--secondaryGradientColor: "#FFFFFF";
+	--secondaryGradientAngle: 170deg;
+	--secondaryGradient: linear-gradient(var(--secondaryGradientAngle), var(--secondaryGradientColor) 20%, var(--secondaryColor) 100%);
+	--secondaryGradientActual: var(--secondaryGradient);
+
+	--art-size: 52px;
+	--art-outline-size: 2px;
+	--art-outline-brightness: 155%;
+	--art-url: url('./placeholder.png');
+	--show-art: block;
+	--show-art-outline: block;
+	--art-border-radius: 4px;
+
+	--background-art-height: 80px;
+	--background-art-mask-width: 75%;
+	--background-art-mask-height: 105%;
+	--background-art-start-at: 25%;
+	--background-art-end-at: 100%;
+	--background-art-blur-amount: 12px;
+	--background-art-horizontal-offset: -33%;
+	--background-art-vertical-offset: -12.5%;
+	--background-art-opacity: 75%;
+	--show-background-art: none;
+	--background-art-size: 900px;
+	--background-art-mask-side: 0%;
+	--background-art-mask: -webkit-radial-gradient(var(--background-art-mask-side) 0%, var(--background-art-mask-width) var(--background-art-mask-height), rgba(0, 0, 0, 1) var(--background-art-start-at), rgba(0, 0, 0, 0) var(--background-art-end-at));
+	--background-art-mask-actual: var(--background-art-mask);
+	--background-art-offset: 0px;
+
+	--wrapper-padding-bottom: calc(var(--overlayMarginVertical) * 4);
+
+	--box-shadow-effects-offset-x: 0px;
+	--box-shadow-effects-offset-y: 8px;
+	--box-shadow-effects-blur-radius: 9px;
+	--box-shadow-effects-inset: -5px;
+	--box-shadow-effects-color: #000000FF;
+
+	--box-shadow-effects: var(--box-shadow-effects-offset-x) var(--box-shadow-effects-offset-y) var(--box-shadow-effects-blur-radius) var(--box-shadow-effects-inset) var(--box-shadow-effects-color);
+	--box-shadow-effects-actual: var(--box-shadow-effects);
+	--box-shadow-effects-not-slim: var(--box-shadow-effects-offset-x) calc(var(--box-shadow-effects-offset-y) + var(--box-shadow-effects-inset)) var(--box-shadow-effects-blur-radius) var(--box-shadow-effects-color);
+	--box-shadow-effects-not-slim-actual: var(--box-shadow-effects-not-slim);
+
+	--animation-duration: 0.5s;
+	--fadeInDurationLong: 5s;
+
+	--shadowStuff: url(#shadowEffect);
+	--overlayShadowColor: #000000;
+	--outlineStuff: url(#outlineEffect);
+	--overlayOutlineColor: #000000;
+
+	--effects: var(--outlineStuff) var(--shadowStuff);
+
+	--desaturateAmount: 100%;
+	--desaturateFadeInDuration: 2s;
+	--desaturateFadeOutDuration: 0.5s;
+
+	--cssScrollAmount: 0px;
+	--cssScrollDelay: 7s;
+	--cssScrollDuration: 1s;
+
+	--qrSize: 52px;
+	--qrPadding: 2px;
+	--qrBorderRadius: 4px;
+	--qrFilters: invert(75%);
+	--qrOpacity: 100%;
+	--show-qr: block;
+	--qrBGColorStatic: #bbbbbb;
+	--qrGradientAngle: 315deg;
+	--qrGradientColor: #ffffff80;
+	--qrGradient: linear-gradient(var(--qrGradientAngle), var(--qrGradientColor) 0%, transparent 100%);
+	--qrGradientActual: var(--qrGradient);
+	--qrBorderColor: #ffffff40;
+	--qrBorderSize: 1px;
+	--qrBorderStyle: solid;
+	--qrBorder: var(--qrBorderSize) var(--qrBorderStyle) var(--qrBorderColor);
+	--qrBorderActual: 0px;
+
+	--artFilters: saturate(75%) contrast(75%) brightness(133%);
+
+	--healthColorForeground: var(--healthColorForegroundReflected);
+	--healthColorBackground: var(--healthColorBackgroundReflected);
+	--healthColorForegroundStatic: #ffffff;
+	--healthColorBackgroundStatic: #666666;
+	--healthColorForegroundReflected: var(--colorLight);
+	--healthColorBackgroundReflected: var(--colorDark);
+	--healthOutlinePadding: 1px;
+
+	--skullIconDisplay: flex;
+	--skullIconColor: var(--skullIconColorReflected);
+	--skullIconColorStatic: #ffffff;
+	--skullIconColorReflected: var(--colorLight);
+	--skullIconSize: 0.5;
+	--skullSaturateArtAmount: 0%;
+	--skullBrightnessArtAmount: 50%;
+	--skullContrastArtAmount: 150%;
+	--skullIconFilters: var(--skullIconOutlineFilter) var(--skullIconShadowFilter);
+	--skullIconOutlineFilter: url(#outlineEffect);
+	--skullIconShadowFilter: opacity(1);
+	--deathFilters: opacity(1);
+	--deathFiltersActual: saturate(var(--skullSaturateArtAmount)) contrast(var(--skullContrastArtAmount)) brightness(var(--skullBrightnessArtAmount));
+
+	/*--pbHeaderColor: var(--pbHeaderColorReflected);
+	--pbHeaderColorStatic: #cbadff;
+	--pbHeaderColorReflected: var(--colorLight);
+	--pbHeaderGradientColor: #ffffff;
+	--pbHeaderGradientAngle: 170deg;
+	--pbHeaderGradient: var(--pbHeaderGradientActual);
+	--pbHeaderGradientActual: linear-gradient(var(--pbHeaderGradientAngle), var(--pbHeaderGradientColor) 20%, transparent 100%);
+	--pbHeaderGlobeSeparation: 6px;
+	--pbWidth: 130px;
+	--pbLineHeight: 21px;
+	--pbVerticalAlignment: column;
+	--pbVerticalOffset: -1px;
+	--pbAlignment: center;
+	--pbAccColor: #ffffff;
+	--pbAccFontFamily: "Manrope";
+	--pbAccFontStyle: normal;
+	--pbAccFontSize: 27pt;
+	--pbAccFontWeight: 900;
+	--pbAccFontAdditionalWeight: 0px;
+	--pbAccLetterSpacing: -1px;
+	--pbHeaderFontFamily: "Manrope";
+	--pbHeaderFontStyle: normal;
+	--pbHeaderFontSize: 12pt;
+	--pbHeaderFontWeight: 900;
+	--pbHeaderFontAdditionalWeight: 0px;*/
+}

@@ -191,6 +191,25 @@
 	--deathFilters: opacity(1);
 	--deathFiltersActual: saturate(var(--skullSaturateArtAmount)) contrast(var(--skullContrastArtAmount)) brightness(var(--skullBrightnessArtAmount));
 
+	--timingRowColor: #ffffff;
+	--timingRowFontSize: 12pt;
+	--timingRowFontWeight: 900;
+	--timingRowFontAdditionalWeight: 0px;
+	--timingRowLineHeight: 20px;
+	--timingListDirection: column;
+	--timingListJustification: flex-end;
+	--timingListWidth: 100px;
+	--timingListHeight: 120px;
+	--timingListAlignment: center;
+	--timingListCroppingOutline: 1px solid #ffffffcc;
+	--timingPerfectPlusColor: #20ffff;
+	--timingPerfectColor: #20ffff;
+	--timingGreatColor: #33ff00;
+	--timingGoodColor: #ffee00;
+	--timingOkayColor: #ff7722;
+	--timingMissColor: #cc2255;
+	--timingGlowAmount: 1px;
+
 	/*--pbHeaderColor: var(--pbHeaderColorReflected);
 	--pbHeaderColorStatic: #cbadff;
 	--pbHeaderColorReflected: var(--colorLight);

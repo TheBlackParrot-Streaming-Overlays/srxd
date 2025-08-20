@@ -552,6 +552,56 @@ body {
 .basicHeader {
 	position: relative;
 }
+
+#timingWrapper {
+	position: absolute;
+	width: var(--timingListWidth);
+	height: var(--timingListHeight);
+	top: calc(var(--background-art-height) + var(--background-art-offset) + 8px);
+	left: 8px;
+	z-index: -1;
+	/*outline: var(--timingListCroppingOutline);*/
+}
+#timingList {
+	display: flex;
+	flex-direction: var(--timingListDirection);
+	justify-content: var(--timingListJustification);
+	height: var(--timingListHeight);
+    overflow: hidden;
+    padding-bottom: 8px;
+}
+
+.timingRow {
+	font-size: var(--timingRowFontSize);
+	font-weight: var(--timingRowFontWeight);
+	line-height: var(--timingRowLineHeight);
+	text-align: var(--timingListAlignment);
+	text-transform: uppercase;
+}
+.timingRow span {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke: var(--timingRowFontAdditionalWeight) transparent;
+}
+
+.timingPerfectPlus { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingPerfectPlusColor)); }
+.timingPerfectPlus span { background-color: var(--timingPerfectPlusColor); }
+
+.timingPerfect { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingPerfectColor)); }
+.timingPerfect span { background-color: var(--timingPerfectColor); }
+
+.timingGreat { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingGreatColor)); }
+.timingGreat span { background-color: var(--timingGreatColor); }
+
+.timingGood { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingGoodColor)); }
+.timingGood span { background-color: var(--timingGoodColor); }
+
+.timingOkay { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingOkayColor)); }
+.timingOkay span { background-color: var(--timingOkayColor); }
+
+.timingMiss { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingMissColor)); }
+.timingMiss span { background-color: var(--timingMissColor); }
+
 /*#pbCell {
 	min-width: var(--pbWidth);
 	text-align: var(--pbAlignment);

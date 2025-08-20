@@ -247,6 +247,101 @@ function setHealth(health, forced) {
 	oldHealth = health;
 }
 
+var timingMap = {
+	PerfectPlus: "Perfect+",
+	Perfect: "Perfect",
+	Great: "Great",
+	Good: "Good",
+	Okay: "Okay",
+	Miss: "Miss"
+}
+
+// define an observer instance
+var observer = new IntersectionObserver(onIntersection, {
+	root: document.querySelector('#timingList'),
+	threshold: 0
+})
+
+function removeTimingElement(entry) {
+	if(entry.intersectionRatio !== 0) {
+		return;
+	}
+
+	observer.unobserve(entry.target);
+	entry.target.remove();
+}
+// callback is called on intersection change
+function onIntersection(entries, opts){
+	entries.forEach(entry => 
+		removeTimingElement(entry)
+	);
+}
+
+const animationOptions = {
+	direction: "reverse",
+	easing: "ease-in",
+	duration: 67,
+	iterations: 1
+}
+
+function scrollTimingElement(index, element) {
+	element.animate(
+		{
+			transform: ["translateY(100%)"]
+		},
+		animationOptions
+	);
+}
+function scrollNewTimingElement(index, element) {
+	element.animate(
+		{
+			filter: ["brightness(100%)", "brightness(300%) saturate(50%)", "brightness(100%)"]
+		},
+		animationOptions
+	);
+	element.firstElementChild.animate(
+		{
+			transform: ["scaleY(50%) translateY(100%)"],
+		},
+		animationOptions
+	);
+
+	element.animate(
+		{
+			transform: ["none", "translateY(-50%)"],
+			opacity: [1, 0]
+		},
+		{
+			fill: "both",
+			easing: "ease-in-out",
+			duration: 250,
+			iterations: 1,
+			delay: 1500
+		}
+	)
+}
+
+// addTimingRow(Object.keys(timingMap)[Math.floor(Math.random() * 6)]);
+function addTimingRow(timing) {
+	const timingRowFilterWrap = $('<div class="timingRowFilterWrap"></div>');
+
+	const timingRow = $('<div class="timingRow"></div>');
+	timingRowFilterWrap.append(timingRow);
+	timingRow.addClass(`timing${timing}`);
+
+	const textElement = $(`<span></span>`);
+	textElement.text(timingMap[timing]);
+	timingRow.append(textElement);
+
+	$.each($(".timingRow"), scrollTimingElement);
+	$("#timingList").append(timingRowFilterWrap);
+	scrollNewTimingElement(0, timingRowFilterWrap[0]);
+
+	setTimeout(function() {
+		observer.observe(timingRowFilterWrap[0]);
+	}, 33);
+}
+
 currentState = {};
 const eventFuncs = {
 	"state": function(data) {
@@ -383,6 +478,10 @@ const eventFuncs = {
 		setHealth(1, true);
 		setScore(0);
 		setHitMiss(currentState);*/
+	},
+
+	"hit": function(type) {
+		addTimingRow(type);
 	}
 
 	/*"qr": function(qr) {

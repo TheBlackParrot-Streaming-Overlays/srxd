@@ -200,7 +200,7 @@
 	--timingListJustification: flex-end;
 	--timingListWidth: 100px;
 	--timingListHeight: 120px;
-	--timingListAlignment: center;
+	--timingListAlignment: left;
 	--timingListCroppingOutline: 1px solid #ffffffcc;
 	--timingPerfectPlusColor: #20ffff;
 	--timingPerfectColor: #20ffff;

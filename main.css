@@ -572,6 +572,8 @@ body {
 }
 
 .timingRow {
+	padding-left: 6px;
+	padding-right: 6px;
 	font-size: var(--timingRowFontSize);
 	font-weight: var(--timingRowFontWeight);
 	line-height: var(--timingRowLineHeight);

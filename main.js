@@ -246,7 +246,7 @@ function setHealth(health, forced) {
 
 	oldHealth = health;
 }
-
+/*
 var timingMap = {
 	PerfectPlus: "Perfect+",
 	Perfect: "Perfect",
@@ -340,7 +340,7 @@ function addTimingRow(timing) {
 	setTimeout(function() {
 		observer.observe(timingRowFilterWrap[0]);
 	}, 33);
-}
+}*/
 
 currentState = {};
 const eventFuncs = {
@@ -478,11 +478,11 @@ const eventFuncs = {
 		setHealth(1, true);
 		setScore(0);
 		setHitMiss(currentState);*/
-	},
-
-	"hit": function(type) {
-		addTimingRow(type);
 	}
+
+	/*"hit": function(type) {
+		addTimingRow(type);
+	}*/
 
 	/*"qr": function(qr) {
 		activeMap.qrCode = qr;

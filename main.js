@@ -181,7 +181,7 @@ function toggleOverlay(show) {
 	clearTimeout(hideShowTO);
 	if(show) {
 		//$("#miscInfoCell, #hitMissCell, #accCell, #ppCell, #qrCell, #pbCell, #bsStatusCell, #handValueCell").removeClass("fadeOut").addClass("fadeIn");
-		$("#miscInfoCell, #hitMissCell, #scoreCell, #qrCell").removeClass("fadeOut").addClass("fadeIn");
+		$("#miscInfoCell, #hitMissCell, #scoreCell, #qrCell, #accCell").removeClass("fadeOut").addClass("fadeIn");
 		$("#bgWrapper").removeClass("fadeOut").addClass("fadeInLong");
 		$("#title").removeClass("slideOut").addClass("slideIn");
 
@@ -192,7 +192,7 @@ function toggleOverlay(show) {
 			$("#artWrapper").removeClass("fadeOut");
 		}, 100);
 	} else {
-		$("#miscInfoCell, #hitMissCell, #scoreCell, #qrCell").removeClass("fadeIn").addClass("fadeOut");
+		$("#miscInfoCell, #hitMissCell, #scoreCell, #qrCell, #accCell").removeClass("fadeIn").addClass("fadeOut");
 		$("#bgWrapper").removeClass("fadeInLong").addClass("fadeOut");
 		$("#title").removeClass("slideIn").addClass("slideOut");
 
@@ -246,14 +246,15 @@ function setHealth(health, forced) {
 
 	oldHealth = health;
 }
-/*
-var timingMap = {
+
+var timingTextMap = {
 	PerfectPlus: "Perfect+",
 	Perfect: "Perfect",
 	Great: "Great",
 	Good: "Good",
-	Okay: "Okay",
-	Miss: "Miss"
+	Okay: "Late",
+	EarlyOkay: "Early",
+	Failed: "Miss"
 }
 
 // define an observer instance
@@ -323,14 +324,19 @@ function scrollNewTimingElement(index, element) {
 
 // addTimingRow(Object.keys(timingMap)[Math.floor(Math.random() * 6)]);
 function addTimingRow(timing) {
+	let timingClass = timing.replace("Early", "");
+	if(!(timing in timingTextMap)) {
+		timing = timing.replace("Early", "");
+	}
+
 	const timingRowFilterWrap = $('<div class="timingRowFilterWrap"></div>');
 
 	const timingRow = $('<div class="timingRow"></div>');
 	timingRowFilterWrap.append(timingRow);
-	timingRow.addClass(`timing${timing}`);
+	timingRow.addClass(`timing${timingClass}`);
 
 	const textElement = $(`<span></span>`);
-	textElement.text(timingMap[timing]);
+	textElement.text(timingTextMap[timing]);
 	timingRow.append(textElement);
 
 	$.each($(".timingRow"), scrollTimingElement);
@@ -340,7 +346,7 @@ function addTimingRow(timing) {
 	setTimeout(function() {
 		observer.observe(timingRowFilterWrap[0]);
 	}, 33);
-}*/
+}
 
 currentState = {};
 const eventFuncs = {
@@ -352,12 +358,12 @@ const eventFuncs = {
 			togglePause(previousState !== "playing");
 		}
 
-		/*if(data.score === 1 && !data.hits) {
-			//let precision = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
-			$("#score").text(`00${precision ? `.${"".padStart(parseInt(precision), "0")}` : ""}`);
+		if(data.acc === 1 && !data.hits) {
+			let precision = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
+			$("#acc").text(`00${precision ? `.${"".padStart(parseInt(precision), "0")}` : ""}`);
 		} else {
-			setScore(data.score * 100);
-		}*/
+			setAcc(data.acc * 100);
+		}
 
 		if(data.score > 0) {
 			setScore(data.score);
@@ -413,6 +419,8 @@ const eventFuncs = {
 		//setQR();
 		setDiff();
 		setScore(0);
+		let precision = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
+		$("#acc").text(`00${precision ? `.${"".padStart(parseInt(precision), "0")}` : ""}`);
 
 		songLength = Math.ceil(map.song.duration);
 		$("#duration").text(formatTime(songLength));
@@ -478,11 +486,11 @@ const eventFuncs = {
 		setHealth(1, true);
 		setScore(0);
 		setHitMiss(currentState);*/
-	}
+	},
 
-	/*"hit": function(type) {
+	"hit": function(type) {
 		addTimingRow(type);
-	}*/
+	}
 
 	/*"qr": function(qr) {
 		activeMap.qrCode = qr;
@@ -634,7 +642,7 @@ function setScore(score) {
 	finalScore = score
 
 	if(localStorage.getItem("setting_srxd_animateScoreChanges") === "true") {
-		if(!isAnimating) {
+		if(!isAnimatingScore) {
 			animateScoreChange();
 		}
 	} else {
@@ -644,12 +652,12 @@ function setScore(score) {
 }
 
 var currentScoreInterval = parseInt(localStorage.getItem("setting_srxd_animateScoreInterval"));
-var isAnimating = false;
+var isAnimatingScore = false;
 function animateScoreChange() {
-	isAnimating = true;
+	isAnimatingScore = true;
 
 	if(curScore === finalScore) {
-		isAnimating = false;
+		isAnimatingScore = false;
 		$("#score").text(finalScore.toLocaleString());
 		return;
 	}
@@ -658,7 +666,7 @@ function animateScoreChange() {
 
 	let toChange = finalScore - curScore;
 	if(!toChange) {
-		isAnimating = false;
+		isAnimatingScore = false;
 		$("#score").text(finalScore.toLocaleString());
 		return;
 	}
@@ -674,6 +682,61 @@ function animateScoreChange() {
 	setTimeout(animateScoreChange, currentScoreInterval);
 }
 
+var finalAcc = 100;
+var curAcc = 100;
+function setAcc(acc) {
+	const decimalPlaces = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
+	const factor = Math.pow(10, decimalPlaces);
+
+	acc = Math.floor(factor * acc) / factor;
+	
+	finalAcc = parseFloat(acc.toFixed(decimalPlaces));
+
+	if(localStorage.getItem("setting_srxd_animateAccChanges") === "true") {
+		if(!isAnimatingAcc) {
+			animateAccChange();
+		}
+	} else {
+		curAcc = finalAcc;
+		$("#acc").text(finalAcc.toFixed(decimalPlaces));
+	}
+}
+
+var currentAccInterval = parseInt(localStorage.getItem("setting_srxd_animateAccInterval"));
+var isAnimatingAcc = false;
+function animateAccChange() {
+	isAnimatingAcc = true;
+
+	const decimalPlaces = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
+
+	if(curAcc === finalAcc) {
+		isAnimatingAcc = false;
+		$("#acc").text(finalAcc.toFixed(decimalPlaces));
+		return;
+	}
+
+	const divisor = Math.max(parseInt(localStorage.getItem("setting_srxd_accAnimationDivisor")), 1);
+	const factor = Math.pow(divisor, decimalPlaces);
+
+	let toChange = parseFloat((Math.round((finalAcc - curAcc) * factor) / factor).toFixed(decimalPlaces));
+	if(!toChange) {
+		isAnimatingAcc = false;
+		$("#acc").text(finalAcc.toFixed(decimalPlaces));
+		return;
+	}
+
+	if(toChange > 0) {
+		curAcc += Math.ceil((toChange * factor) / divisor) / factor;
+	} else if(toChange < 0) {
+		curAcc += Math.floor((toChange * factor) / divisor) / factor;
+	}
+
+	$("#acc").text(curAcc.toFixed(decimalPlaces));
+
+	setTimeout(animateAccChange, currentAccInterval);
+}
+
+var showPerfectPlusHits = localStorage.getItem("setting_srxd_showPerfectPlusHitsIfFC") === "true";
 function setHitMiss(state) {
 	$("#missValue").text(state.misses.toLocaleString());
 	$("#hitValue").text(state.hits.toLocaleString());
@@ -716,5 +779,15 @@ function setHitMiss(state) {
 		$("#missCell").show();
 	} else {
 		$("#missCell").hide();
+	}
+
+	$("#perfectPlusHits").text(state.perfectPlusHits.toLocaleString());
+
+	if(showPerfectPlusHits && (showPFC || showFC)) {
+		$("#comboWrap").hide();
+		$("#perfectPlusHitsWrap").show();
+	} else {
+		$("#comboWrap").show();
+		$("#perfectPlusHitsWrap").hide();
 	}
 }

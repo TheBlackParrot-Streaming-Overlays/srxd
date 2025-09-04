@@ -55,8 +55,21 @@
 	--scoreFontWeight: 900;
 	--scoreVerticalAlignment: column;
 	--scoreAlignment: center;
-	--scoreLineHeight: 22px;
+	--scoreLineHeight: 0px;
 	--scoreVerticalOffset: -1px;
+
+	--accColor: #FFFFFFFF;
+	--accFontFamily: "Manrope";
+	--accFontStyle: normal;
+	--accFontAdditionalWeight: 0px;
+	--accWidth: 140px;
+	--accFontSize: 27pt;
+	--accCharacterSpacing: -1px;
+	--accFontWeight: 900;
+	--accVerticalAlignment: column;
+	--accAlignment: center;
+	--accLineHeight: 22px;
+	--accVerticalOffset: -1px;
 
 	--comboColor: #FFFFFFFF;
 	--comboFontFamily: "Manrope";
@@ -66,6 +79,14 @@
 	--comboFontAdditionalWeight: 0px;
 	--comboAlignmentDirection: ltr;
 	--comboVerticalAlignment: start;
+
+	--perfectPlusHitsColor: #FFFFFFFF;
+	--perfectPlusHitsFontFamily: "Manrope";
+	--perfectPlusHitsFontStyle: normal;
+	--perfectPlusHitsFontSize: 12pt;
+	--perfectPlusHitsFontWeight: 900;
+	--perfectPlusHitsFontAdditionalWeight: 0px;
+	--perfectPlusHitsHeadTransform: capitalize;
 
 	--metadataLineHeight: 24px;
 	--fixWeirdMetadataAlignmentIssue: 1px;
@@ -207,7 +228,7 @@
 	--timingGreatColor: #33ff00;
 	--timingGoodColor: #ffee00;
 	--timingOkayColor: #ff7722;
-	--timingMissColor: #cc2255;
+	--timingFailedColor: #cc2255;
 	--timingGlowAmount: 1px;
 
 	/*--pbHeaderColor: var(--pbHeaderColorReflected);

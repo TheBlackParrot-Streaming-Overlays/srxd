@@ -1,5 +1,5 @@
-const overlayRevision = 1;
-const overlayRevisionTimestamp = 1756032034047;
+const overlayRevision = 2;
+const overlayRevisionTimestamp = 1756970934557;
 
 const settingsChannel = new BroadcastChannel("settings_overlay");
 
@@ -20,8 +20,8 @@ const elementMap = {
 	"artCell": ["art", "cover", "coverart", "pic", "picture", "img", "image"],
 	"metadataCell": ["meta", "metadata", "song", "map", "track", "title", "which", "data"],
 	"hitMissCell": ["hit", "miss", "hitmiss", "hits", "misses", "correct", "wrong", "errors", "error"],
-	//"accCell": ["acc", "accuracy", "combo", "percent", "percentage", "score"],
-	"scoreCell": ["score", "points", "combo"],
+	"accCell": ["acc", "accuracy", "percent", "percentage", "combo"],
+	"scoreCell": ["score", "points"],
 	//"ppCell": ["pp", "rank", "ranked", "points", "rankpoints", "rankedpoints", "performancepoints", "rankpp"],
 	"qrCell": ["qr", "qrcode", "scannable", "scan", "aztec", "pdf", "pdf417"],
 	//"pbCell": ["pb", "best", "personalbest", "personal_best", "highscore"],
@@ -40,7 +40,7 @@ function setDiff() {
 	if(!("map" in activeMap)) {
 		return;
 	}
-	$("#diff").text(diffMap[activeMap.map.difficulty]);
+	$("#diff").text(diffMap[activeMap.map.difficulty] + ("rating" in activeMap.map ? ` (${activeMap.map.rating})` : ""));
 }
 
 function getSmoothMatrix(size, threshold) {
@@ -331,6 +331,9 @@ const settingUpdaters = {
 	hitMissWidth: function(value) {
 		rootCSS().setProperty("--hitMissWidth", `${value}px`);
 	},
+	accWidth: function(value) {
+		rootCSS().setProperty("--accWidth", `${value}px`);
+	},
 	scoreWidth: function(value) {
 		rootCSS().setProperty("--scoreWidth", `${value}px`);
 	},
@@ -341,15 +344,15 @@ const settingUpdaters = {
 			rootCSS().setProperty("--hitMissVerticalAlignment", "column");
 		}
 	},
-	flipScoreDetails: function(value) {
+	flipAccDetails: function(value) {
 		if(value === "true") {
-			rootCSS().setProperty("--scoreVerticalAlignment", "column-reverse");
+			rootCSS().setProperty("--accVerticalAlignment", "column-reverse");
 			rootCSS().setProperty("--comboVerticalAlignment", 'end');
-			rootCSS().setProperty("--scoreVerticalOffset", '1px');
+			rootCSS().setProperty("--accVerticalOffset", '1px');
 		} else {
-			rootCSS().setProperty("--scoreVerticalAlignment", "column");
+			rootCSS().setProperty("--accVerticalAlignment", "column");
 			rootCSS().setProperty("--comboVerticalAlignment", 'start');
-			rootCSS().setProperty("--scoreVerticalOffset", '-1px');
+			rootCSS().setProperty("--accVerticalOffset", '-1px');
 		}
 	},
 
@@ -430,6 +433,32 @@ const settingUpdaters = {
 		rootCSS().setProperty("--FCIconColor", value);
 	},
 
+	accColor: function(value) {
+		rootCSS().setProperty("--accColor", value);
+	},
+	accFontFamily: function(value) {
+		rootCSS().setProperty("--accFontFamily", value);
+	},
+	accFontItalic: function(value) {
+		if(value === "true") {
+			rootCSS().setProperty("--accFontStyle", "italic");
+		} else {
+			rootCSS().setProperty("--accFontStyle", "normal");
+		}
+	},
+	accFontSize: function(value) {
+		rootCSS().setProperty("--accFontSize", `${value}pt`);
+	},
+	accFontWeight: function(value) {
+		rootCSS().setProperty("--accFontWeight", value);
+	},
+	accFontAdditionalWeight: function(value) {
+		rootCSS().setProperty("--accFontAdditionalWeight", `${value}px`);
+	},
+	accLetterSpacing: function(value) {
+		rootCSS().setProperty("--accCharacterSpacing", `${value}px`);
+	},
+
 	scoreColor: function(value) {
 		rootCSS().setProperty("--scoreColor", value);
 	},
@@ -476,6 +505,9 @@ const settingUpdaters = {
 	},
 	animateScoreInterval: function(value) {
 		currentScoreInterval = parseInt(localStorage.getItem("setting_srxd_animateScoreInterval"));
+	},
+	animateAccInterval: function(value) {
+		currentAccInterval = parseInt(localStorage.getItem("setting_bs_animateAccInterval"));
 	},
 
 	desaturateOnPause: function(value) {
@@ -527,6 +559,15 @@ const settingUpdaters = {
 		}
 		updateMarquee();
 	},
+	accAlignment: function(value) {
+		rootCSS().setProperty("--accAlignment", value);
+		if(value === "left" || value === "center") {
+			rootCSS().setProperty("--comboAlignmentDirection", "ltr");
+		} else {
+			rootCSS().setProperty("--comboAlignmentDirection", "rtl");
+		}
+		updateMarquee();
+	},
 
 	miscInfoFontWeight: function(value) {
 		rootCSS().setProperty("--miscInfoFontWeight", value);
@@ -570,6 +611,9 @@ const settingUpdaters = {
 	},
 	scoreLineHeight: function(value) {
 		rootCSS().setProperty("--scoreLineHeight", `${value}px`);
+	},
+	accLineHeight: function(value) {
+		rootCSS().setProperty("--accLineHeight", `${value}px`);
 	},
 
 	enableShadowEffects: function(value) {
@@ -623,7 +667,7 @@ const settingUpdaters = {
 		settingUpdaters.overlayOutlineOrder(localStorage.getItem("setting_srxd_outlineOrder"));
 	},
 	
-	/*accPrecision: function(value) {
+	accPrecision: function(value) {
 		value = parseInt(value);
 
 		curAcc = 0;
@@ -638,7 +682,49 @@ const settingUpdaters = {
 		} else {
 			$("#acc").text(`00${value ? `.${"".padStart(parseInt(value), "0")}` : ""}`);
 		}
-	},*/
+	},
+	perfectPlusHitsColor: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsColor", value);
+	},
+	perfectPlusHitsFontFamily: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsFontFamily", value);
+	},
+	perfectPlusHitsFontItalic: function(value) {
+		if(value === "true") {
+			rootCSS().setProperty("--perfectPlusHitsFontStyle", "italic");
+		} else {
+			rootCSS().setProperty("--perfectPlusHitsFontStyle", "normal");
+		}
+	},
+	perfectPlusHitsFontSize: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsFontSize", `${value}pt`);
+	},
+	perfectPlusHitsFontWeight: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsFontWeight", value);
+	},
+	perfectPlusHitsFontAdditionalWeight: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsFontAdditionalWeight", `${value}px`);
+	},
+	showPerfectPlusHitsIfFC: function(value) {
+		showPerfectPlusHits = (value === "true");
+
+		if(currentState.misses) {
+			$("#comboWrap").show();
+			$("#perfectPlusHitsWrap").hide();
+			return;
+		}
+
+		if(value === "true") {
+			$("#comboWrap").hide();
+			$("#perfectPlusHitsWrap").show();
+		} else {
+			$("#comboWrap").show();
+			$("#perfectPlusHitsWrap").hide();
+		}
+	},
+	perfectPlusHitsHeadTransform: function(value) {
+		rootCSS().setProperty("--perfectPlusHitsHeadTransform", value);
+	},
 
 	qrHeight: function(value) {
 		rootCSS().setProperty("--qrSize", `${value}px`);

@@ -97,7 +97,8 @@ body {
 #diffWrap, #codeWrap, #timeWrap,
 #title, #artist, .mapper, #mapperContainer:before,
 #hitMissCell,
-#scoreWrap, #comboWrap,
+#accWrap, #scoreWrap, #comboWrap,
+#perfectPlusHits, #perfectPlusHitsHead,
 /*#pbAccWrap, .basicHeader {*/
 .basicHeader {
 	filter:	var(--effects);
@@ -155,11 +156,11 @@ body {
 }
 
 /*#duration, #time, #combo, #acc, #hitValue, #missValue, #ssValue, #blValue, #fcAcc, .handCellContainer, #pbAcc {*/
-#duration, #time, #combo, #score, #hitValue, #missValue {
+#duration, #time, #combo, #acc, #score, #hitValue, #missValue, #perfectPlusHits {
 	font-variant: tabular-nums;
 }
 /*#miscInfoCell, #metadataCell, #hitMissCell, #accCell, #ppCell, #handValueCell, #pbCell {*/
-#miscInfoCell, #metadataCell, #hitMissCell, #scoreCell {
+#miscInfoCell, #metadataCell, #hitMissCell, #accCell, #scoreCell {
 	white-space: nowrap;
 	overflow-x: clip;
 }
@@ -167,7 +168,7 @@ body {
 	overflow: hidden; /* ????? */
 }
 /*#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #accWrap, #pbAccWrap, .basicHeader, #mapModifiersWrap {*/
-#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #scoreWrap, .basicHeader {
+#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #accWrap, #scoreWrap, .basicHeader, #perfectPlusHitsWrap {
 	padding-top: var(--verticalSpacing);
 	padding-bottom: var(--verticalSpacing);
 }
@@ -299,21 +300,56 @@ body {
 	position: relative;
 	top: var(--scoreVerticalOffset);
 }
-.accPerc {
-	margin-left: 0.1em;
-}
-#accWrap .accPerc {
-	font-size: calc(var(--accFontSize) / 1.67);
-}
 #score {
 	display: inline-block;
 	line-height: calc(var(--scoreLineHeight) + 3px);
 	margin-bottom: 6px;
 }
 
+#accCell {
+	min-width: var(--accWidth);
+	text-align: var(--accAlignment);
+	font-weight: var(--primaryFontWeight);
+	overflow-x: visible;
+	flex-direction: var(--accVerticalAlignment);
+	line-height: var(--accLineHeight);
+}
+#accWrap {
+	font-family: var(--accFontFamily);
+	font-size: var(--accFontSize);
+	font-weight: var(--accFontWeight);
+	font-style: var(--accFontStyle);
+	letter-spacing: var(--accCharacterSpacing);
+	background-color: var(--accColor);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke: var(--accFontAdditionalWeight) transparent;
+	padding-bottom: 0px;
+	/* there's some weird vertical mis-alignment i literally cannot think of a solution for so i'm just doing it the hard way */
+	position: relative;
+	top: var(--accVerticalOffset);
+}
+.accPerc {
+	margin-left: 0.1em;
+}
+#accWrap .accPerc {
+	font-size: calc(var(--accFontSize) / 1.67);
+}
+#acc {
+	display: inline-block;
+	line-height: calc(var(--accLineHeight) + 3px);
+}
+
 #comboWrap {
 	font-size: var(--comboFontSize);
 	height: var(--scoreLineHeight);
+	line-height: 0px;
+	direction: var(--comboAlignmentDirection);
+	align-content: var(--comboVerticalAlignment);
+}
+#perfectPlusHitsWrap {
+	font-size: var(--perfectPlusHitsFontSize);
+	height: var(--accLineHeight);
 	line-height: 0px;
 	direction: var(--comboAlignmentDirection);
 	align-content: var(--comboVerticalAlignment);
@@ -326,6 +362,15 @@ body {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	-webkit-text-stroke: var(--comboFontAdditionalWeight) transparent;	
+}
+#perfectPlusHits {
+	font-family: var(--perfectPlusHitsFontFamily);
+	font-style: var(--perfectPlusHitsFontStyle);
+	font-weight: var(--perfectPlusHitsFontWeight);
+	background-color: var(--perfectPlusHitsColor);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke: var(--perfectPlusHitsFontAdditionalWeight) transparent;		
 }
 
 #artOutline, #artBG, #healthOutline, #skullIcon {
@@ -498,6 +543,16 @@ body {
 	transition: var(--desaturateFadeInDuration);
 }
 
+#perfectPlusHitsHead {
+	line-height: 1em; /* wtf */
+	background-image: var(--secondaryGradientActual);
+	-webkit-text-stroke: var(--perfectPlusHitsFontAdditionalWeight) transparent;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin-right: 0.3em;
+	text-transform: var(--perfectPlusHitsHeadTransform);
+}
+
 #artDoppleganger {
 	height: 0px;
 	position: fixed;
@@ -601,8 +656,8 @@ body {
 .timingOkay { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingOkayColor)); }
 .timingOkay span { background-color: var(--timingOkayColor); }
 
-.timingMiss { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingMissColor)); }
-.timingMiss span { background-color: var(--timingMissColor); }
+.timingFailed { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingFailedColor)); }
+.timingFailed span { background-color: var(--timingFailedColor); }
 
 /*#pbCell {
 	min-width: var(--pbWidth);

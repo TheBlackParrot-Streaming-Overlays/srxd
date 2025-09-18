@@ -419,6 +419,7 @@ const eventFuncs = {
 		//setQR();
 		setDiff();
 		setScore(0);
+		setAcc(100, true);
 		let precision = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
 		$("#acc").text(`00${precision ? `.${"".padStart(parseInt(precision), "0")}` : ""}`);
 
@@ -684,7 +685,7 @@ function animateScoreChange() {
 
 var finalAcc = 100;
 var curAcc = 100;
-function setAcc(acc) {
+function setAcc(acc, forced = false) {
 	const decimalPlaces = parseInt(localStorage.getItem("setting_srxd_accPrecision"));
 	const factor = Math.pow(10, decimalPlaces);
 
@@ -692,14 +693,15 @@ function setAcc(acc) {
 	
 	finalAcc = parseFloat(acc.toFixed(decimalPlaces));
 
-	if(localStorage.getItem("setting_srxd_animateAccChanges") === "true") {
+	if(localStorage.getItem("setting_srxd_animateAccChanges") === "true" && !forced) {
 		if(!isAnimatingAcc) {
 			animateAccChange();
 		}
-	} else {
-		curAcc = finalAcc;
-		$("#acc").text(finalAcc.toFixed(decimalPlaces));
+		return;
 	}
+
+	curAcc = finalAcc;
+	$("#acc").text(finalAcc.toFixed(decimalPlaces));
 }
 
 var currentAccInterval = parseInt(localStorage.getItem("setting_srxd_animateAccInterval"));

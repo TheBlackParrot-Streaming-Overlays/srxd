@@ -229,6 +229,7 @@
 	--timingGoodColor: #ffee00;
 	--timingOkayColor: #ff7722;
 	--timingFailedColor: #cc2255;
+	--timingOverbeatColor: #cc2255;
 	--timingGlowAmount: 1px;
 
 	/*--pbHeaderColor: var(--pbHeaderColorReflected);

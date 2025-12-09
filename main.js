@@ -254,7 +254,8 @@ var timingTextMap = {
 	Good: "Good",
 	Okay: "Late",
 	EarlyOkay: "Early",
-	Failed: "Miss"
+	Failed: "Miss",
+	Overbeat: "Overbeat"
 }
 
 // define an observer instance

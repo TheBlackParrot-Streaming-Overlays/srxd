@@ -659,6 +659,9 @@ body {
 .timingFailed { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingFailedColor)); }
 .timingFailed span { background-color: var(--timingFailedColor); }
 
+.timingOverbeat { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingOverbeatColor)); }
+.timingOverbeat span { background-color: var(--timingOverbeatColor); }
+
 /*#pbCell {
 	min-width: var(--pbWidth);
 	text-align: var(--pbAlignment);

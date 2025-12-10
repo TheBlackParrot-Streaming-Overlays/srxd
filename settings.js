@@ -24,7 +24,7 @@ const elementMap = {
 	"scoreCell": ["score", "points"],
 	//"ppCell": ["pp", "rank", "ranked", "points", "rankpoints", "rankedpoints", "performancepoints", "rankpp"],
 	"qrCell": ["qr", "qrcode", "scannable", "scan", "aztec", "pdf", "pdf417"],
-	//"pbCell": ["pb", "best", "personalbest", "personal_best", "highscore"],
+	"pbCell": ["pb", "best", "personalbest", "personal_best", "highscore"]
 };
 
 const diffMap = {
@@ -887,20 +887,6 @@ const settingUpdaters = {
 		rootCSS().setProperty("--skullIconShadowFilter", (value === "true" ? "url(#shadowEffect)" : "opacity(1)"));
 	},
 
-	/*pbPlayerIdentifier: function(value) {
-		if(!value) {
-			setPBDisplay(0);
-			return;
-		}
-
-		if("personalBest" in activeMap) {
-			// if it's present, that means a map has been played
-			getPersonalBest(activeMap.map.hash, diffEnum[activeMap.map.difficulty], activeMap.map.characteristic).then((data) => {
-				activeMap.personalBest = data;
-				setPBDisplay(activeMap.personalBest);
-			});
-		}
-	},
 	pbHeaderText: function(value) {
 		$("#pbHeaderText").text(value);
 	},
@@ -932,22 +918,12 @@ const settingUpdaters = {
 				$("#pbCell").show();
 			}
 
-			if("personalBest" in activeMap) {
-				setPBDisplay(activeMap.personalBest);
+			if("best" in activeMap) {
+				if(activeMap.best.acc) {
+					setPBDisplay(activeMap.best.acc);
+				}
 			}
 		}
-	},
-	pbDisplayGlobalRank: function(value) {
-		if(value === "true") {
-			$("#pbCell .basicHeader .fa-globe").show();
-			$("#pbRankValue").show();
-		} else {
-			$("#pbCell .basicHeader .fa-globe").hide();
-			$("#pbRankValue").hide();			
-		}
-	},
-	pbHeaderGlobeSeparation: function(value) {
-		rootCSS().setProperty("--pbHeaderGlobeSeparation", `${value}px`);
 	},
 	pbWidth: function(value) {
 		rootCSS().setProperty("--pbWidth", `${value}px`);
@@ -958,21 +934,25 @@ const settingUpdaters = {
 	flipPBDetails: function(value) {
 		if(value === "true") {
 			rootCSS().setProperty("--pbVerticalAlignment", "column-reverse");
-			rootCSS().setProperty("--pbVerticalOffset", '1px');
+			rootCSS().setProperty("--pbVerticalOffset", '2px');
 		} else {
 			rootCSS().setProperty("--pbVerticalAlignment", "column");
-			rootCSS().setProperty("--pbVerticalOffset", '-1px');
+			rootCSS().setProperty("--pbVerticalOffset", '-2px');
 		}		
 	},
 	pbAlignment: function(value) {
 		rootCSS().setProperty("--pbAlignment", value);
 	},
 	pbPrecision: function(value) {
-		if("personalBest" in activeMap) {
-			setPBDisplay(activeMap.personalBest);
-		} else {
-			setPBDisplay(0);
-		}		
+		let final = 0;
+
+		if("best" in activeMap) {
+			if(activeMap.best.acc) {
+				final = activeMap.best.acc;
+			}
+		}
+
+		setPBDisplay(final);
 	},
 	pbAccColor: function(value) {
 		rootCSS().setProperty("--pbAccColor", value);
@@ -1018,56 +998,7 @@ const settingUpdaters = {
 	pbHeaderFontAdditionalWeight: function(value) {
 		rootCSS().setProperty("--pbHeaderFontAdditionalWeight", `${value}px`);
 	},
-	pbLeaderboardContext: function(value) {
-		if("personalBest" in activeMap) {
-			// if it's present, that means a map has been played
-			getPersonalBest(activeMap.map.hash, diffEnum[activeMap.map.difficulty], activeMap.map.characteristic).then((data) => {
-				activeMap.personalBest = data;
-				setPBDisplay(activeMap.personalBest);
-			});
-		}		
-	},
-	pbRankIcon: function(value) {
-		if(!("personalBest" in activeMap) && value === "avatar") {
-			// we goin too fast
-			setTimeout(() => {
-				settingUpdaters.pbRankIcon(value);
-			}, 1000);
-			return;
-		}
 
-		$("#pbCell .basicHeader i").attr("class", "");
-		$("#pbCell .basicHeader i").hide();
-		$("#pbCell .basicHeader #blAvatar").hide();
-		$("#pbCell .basicHeader #blIcon").hide();
-
-		switch(value) {
-			case "none":
-				return;
-				break;
-
-			case "avatar":
-				$("#pbCell .basicHeader #blAvatar").show();
-				return;
-				break;
-
-			case "blicon":
-				$("#pbCell .basicHeader #blIcon").show();
-				return;
-				break;
-		}
-
-		$("#pbCell .basicHeader i").show();
-
-		var isRegularKind = false;
-		if(value.indexOf("_reg") !== -1) {
-			isRegularKind = true;
-			value = value.substr(0, value.indexOf("_reg"));
-		}
-
-		$("#pbCell .basicHeader i").addClass(isRegularKind ? "fa-regular" : "fa-solid");
-		$("#pbCell .basicHeader i").addClass(value);
-	},*/
 	healthOutlinePadding: function(value) {
 		rootCSS().setProperty("--healthOutlinePadding", `${value}px`);
 	},

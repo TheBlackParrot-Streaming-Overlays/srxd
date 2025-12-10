@@ -460,7 +460,7 @@ const eventFuncs = {
 		//refreshLeaderboardData(map.map.difficulty, map.map.characteristic, map.map.hash);
 
 		//map.personalBest = await getPersonalBest(map.map.hash, diffEnum[map.map.difficulty], map.map.characteristic);
-		//setPBDisplay(map.personalBest);
+		setPBDisplay(map.best.acc);
 
 		//checkCustomColors();
 	},
@@ -782,5 +782,29 @@ function setHitMiss(state) {
 	} else {
 		$("#comboWrap").show();
 		$("#perfectPlusHitsWrap").hide();
+	}
+}
+
+function setPBDisplay(value) {
+	if(localStorage.getItem("setting_srxd_hidePBCellIfNoScore") === "true" && !value) {
+		if($("#pbCell").is(":visible")) {
+			$("#pbCell").hide();
+			updateMarquee();
+		}
+	}
+
+	if(value > 0 && $("#pbCell").attr("data-enabled") === "true") {
+		if(!$("#pbCell").is(":visible")) {
+			$("#pbCell").show();
+			updateMarquee();
+		}
+	}
+
+	const precision = parseInt(localStorage.getItem("setting_srxd_pbPrecision"));
+
+	if(!value) {
+		$("#pbAcc").text("--.".padEnd(3 + precision, "-"));
+	} else {
+		$("#pbAcc").text(value.toFixed(precision));
 	}
 }

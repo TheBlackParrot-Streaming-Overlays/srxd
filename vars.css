@@ -232,18 +232,17 @@
 	--timingOverbeatColor: #cc2255;
 	--timingGlowAmount: 1px;
 
-	/*--pbHeaderColor: var(--pbHeaderColorReflected);
+	--pbHeaderColor: var(--pbHeaderColorReflected);
 	--pbHeaderColorStatic: #cbadff;
 	--pbHeaderColorReflected: var(--colorLight);
 	--pbHeaderGradientColor: #ffffff;
 	--pbHeaderGradientAngle: 170deg;
 	--pbHeaderGradient: var(--pbHeaderGradientActual);
 	--pbHeaderGradientActual: linear-gradient(var(--pbHeaderGradientAngle), var(--pbHeaderGradientColor) 20%, transparent 100%);
-	--pbHeaderGlobeSeparation: 6px;
 	--pbWidth: 130px;
 	--pbLineHeight: 21px;
 	--pbVerticalAlignment: column;
-	--pbVerticalOffset: -1px;
+	--pbVerticalOffset: -2px;
 	--pbAlignment: center;
 	--pbAccColor: #ffffff;
 	--pbAccFontFamily: "Manrope";
@@ -256,5 +255,5 @@
 	--pbHeaderFontStyle: normal;
 	--pbHeaderFontSize: 12pt;
 	--pbHeaderFontWeight: 900;
-	--pbHeaderFontAdditionalWeight: 0px;*/
+	--pbHeaderFontAdditionalWeight: 0px;
 }

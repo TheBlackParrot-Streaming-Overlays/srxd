@@ -99,7 +99,7 @@ body {
 #hitMissCell,
 #accWrap, #scoreWrap, #comboWrap,
 #perfectPlusHits, #perfectPlusHitsHead,
-/*#pbAccWrap, .basicHeader {*/
+#pbAccWrap,
 .basicHeader {
 	filter:	var(--effects);
 }
@@ -156,11 +156,11 @@ body {
 }
 
 /*#duration, #time, #combo, #acc, #hitValue, #missValue, #ssValue, #blValue, #fcAcc, .handCellContainer, #pbAcc {*/
-#duration, #time, #combo, #acc, #score, #hitValue, #missValue, #perfectPlusHits {
+#duration, #time, #combo, #acc, #score, #hitValue, #missValue, #perfectPlusHits, #pbAcc {
 	font-variant: tabular-nums;
 }
 /*#miscInfoCell, #metadataCell, #hitMissCell, #accCell, #ppCell, #handValueCell, #pbCell {*/
-#miscInfoCell, #metadataCell, #hitMissCell, #accCell, #scoreCell {
+#miscInfoCell, #metadataCell, #hitMissCell, #accCell, #scoreCell, #pbCell {
 	white-space: nowrap;
 	overflow-x: clip;
 }
@@ -168,7 +168,7 @@ body {
 	overflow: hidden; /* ????? */
 }
 /*#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #accWrap, #pbAccWrap, .basicHeader, #mapModifiersWrap {*/
-#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #accWrap, #scoreWrap, .basicHeader, #perfectPlusHitsWrap {
+#diffWrap, #codeWrap, #hitCell, #FCCell, #PFCCell, #missCell, #comboWrap, #accWrap, #scoreWrap, .basicHeader, #perfectPlusHitsWrap, #pbAccWrap {
 	padding-top: var(--verticalSpacing);
 	padding-bottom: var(--verticalSpacing);
 }
@@ -667,7 +667,7 @@ body {
 .timingOverbeat { filter: var(--effects) drop-shadow(0px 0px var(--timingGlowAmount) var(--timingOverbeatColor)); }
 .timingOverbeat span { background-color: var(--timingOverbeatColor); }
 
-/*#pbCell {
+#pbCell {
 	min-width: var(--pbWidth);
 	text-align: var(--pbAlignment);
 	font-weight: var(--primaryFontWeight);
@@ -705,56 +705,9 @@ body {
 	-webkit-text-stroke: var(--pbHeaderFontAdditionalWeight) transparent;
 }
 
-#pbRankValue, #pbModifiers {
-	background-color: var(--pbAccColor);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	-webkit-text-stroke: var(--pbHeaderFontAdditionalWeight) transparent;
-	padding-right: 6px;
-	margin-right: -6px;
-}
-#pbRankSymbol {
-	background-color: var(--pbAccColor);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	-webkit-text-stroke: var(--pbHeaderFontAdditionalWeight) transparent;
-	font-size: 0.8em;
-	line-height: 0px;
-	opacity: 0.8;
-	margin-right: -0.25em;
-}
-
-#pbHeaderText {
-	padding-right: 6px;
-	margin-right: calc(-6px + var(--pbHeaderGlobeSeparation));
-}
-
-#blAvatar, #blIcon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	padding: 2px;
-	margin-top: -2px;
-	margin-bottom: -2px;
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-	vertical-align: middle;
-	line-height: 0px;
-	position: relative;
-	bottom: 2px;
-}
-#blAvatar {
-	background-image: var(--blAvatar);
-	border-radius: 50%;
-}
-#blIcon {
-	background-image: url("icons/bl_logo.png");
-}
-
 #pbAccWrap .accPerc {
 	font-size: calc(var(--pbAccFontSize) / 1.67);
-}*/
+}
 
 /* uncomment after OBS updates CEF to a recent chrome version
 :nth-child(1 of div.cell) {

@@ -510,8 +510,13 @@ body {
 	line-height: var(--metadataLineHeight);
 }
 #mapperContainer:before {
-	content: "mapped by ";
 	margin-right: 0.5em;
+}
+.isAuthor:before {
+	content: "mapped by ";
+}
+.isPack:before {
+	content: "from the ";
 }
 .showComma:after {
 	content: ", ";

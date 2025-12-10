@@ -440,31 +440,21 @@ const eventFuncs = {
 		changeMiscInfoDisplay();
 
 		$("#mapperContainer").empty();
-		/*if(localStorage.getItem("setting_srxd_forceSpinShareData") === "true") {
-			if(map.map.uploaders.length) {
-				for(const mapper of map.map.uploaders) {
-					let mapperElement = $(`<div class="mapper showComma"></div>`);
-					if(mapper.avatar) {
-						mapperElement.append($(`<img class="mapperAvatar" src="${mapper.avatar}"/>`))
-					}
-					mapperElement.append(mapper.name);
-					$("#mapperContainer").append(mapperElement);				
-				}
-				$(".mapper:last-child").removeClass("showComma");
-			} else {
-				// fallback to internal data, probably a base game map
-				$("#mapperContainer").append($(`<div class="mapper">${map.map.author}</div>`));
-			}
-		} else {*/
-			let mapperElement = $(`<div class="mapper"></div>`);
-			/*if(map.map.uploaders.length) {
-				if(map.map.uploaders[0].avatar) {
-					mapperElement.append($(`<img class="mapperAvatar" src="${map.map.uploaders[0].avatar}"/>`))
-				}
-			}*/
+
+		let mapperElement = $(`<div class="mapper"></div>`);
+
+		if(map.map.pack) {
+			mapperElement.append(map.map.pack);
+			$("#mapperContainer").addClass("isPack");
+			$("#mapperContainer").removeClass("isAuthor");
+		} else {
 			mapperElement.append(map.map.author);
-			$("#mapperContainer").append(mapperElement);
-		//}
+			$("#mapperContainer").removeClass("isPack");
+			$("#mapperContainer").addClass("isAuthor");
+		}
+
+		$("#mapperContainer").append(mapperElement);
+
 
 		updateSecondaryMarquee();
 		//refreshLeaderboardData(map.map.difficulty, map.map.characteristic, map.map.hash);

@@ -549,9 +549,13 @@ body {
 }
 
 #perfectPlusHitsHead {
+	font-family: var(--pbHeaderFontFamily);
+	font-size: var(--pbHeaderFontSize);
+	font-style: var(--pbHeaderFontStyle);
+	font-weight: var(--pbHeaderFontWeight);
 	line-height: 1em; /* wtf */
 	background-image: var(--secondaryGradientActual);
-	-webkit-text-stroke: var(--perfectPlusHitsFontAdditionalWeight) transparent;
+	-webkit-text-stroke: var(--pbHeaderFontAdditionalWeight) transparent;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	margin-right: 0.3em;

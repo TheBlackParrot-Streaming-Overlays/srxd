@@ -1049,3 +1049,26 @@ function updateSetting(which, value, oldValue) {
 window.addEventListener("storage", function(event) {
 	updateSetting(event.key, event.newValue, event.oldValue);
 });
+
+window.addEventListener("storage", function(event) {
+	const safe = localStorage.getItem("setting_srxd_ensureColorIsBrightEnough") === "true";
+
+	let minBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMinBrightness"))/100) * 255;
+	let maxBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMaxBrightness"))/100) * 255;
+
+	switch(event.key) {
+		case "art_darkColor":
+			$(":root").get(0).style.setProperty("--colorDark", event.newValue);
+			$(":root").get(0).style.setProperty("--colorSafeDark", ensureSafeColor(event.newValue, minBrightness, maxBrightness));
+			break;
+
+		case "art_lightColor":
+			$(":root").get(0).style.setProperty("--colorLight", event.newValue);
+			$(":root").get(0).style.setProperty("--colorSafeLight", ensureSafeColor(event.newValue, minBrightness, maxBrightness));
+			break;
+	}
+});
+$(":root").get(0).style.setProperty("--colorLight", localStorage.getItem("art_lightColor"));
+$(":root").get(0).style.setProperty("--colorDark", localStorage.getItem("art_darkColor"));
+$(":root").get(0).style.setProperty("--colorSafeLight", ensureSafeColor(localStorage.getItem("art_lightColor"), minBrightness, maxBrightness));
+$(":root").get(0).style.setProperty("--colorSafeDark", ensureSafeColor(localStorage.getItem("art_darkColor"), minBrightness, maxBrightness));

@@ -1068,7 +1068,14 @@ window.addEventListener("storage", function(event) {
 			break;
 	}
 });
-$(":root").get(0).style.setProperty("--colorLight", localStorage.getItem("art_lightColor"));
-$(":root").get(0).style.setProperty("--colorDark", localStorage.getItem("art_darkColor"));
-$(":root").get(0).style.setProperty("--colorSafeLight", ensureSafeColor(localStorage.getItem("art_lightColor"), minBrightness, maxBrightness));
-$(":root").get(0).style.setProperty("--colorSafeDark", ensureSafeColor(localStorage.getItem("art_darkColor"), minBrightness, maxBrightness));
+
+function initArtColors() {
+	let minBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMinBrightness"))/100) * 255;
+	let maxBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMaxBrightness"))/100) * 255;
+	
+	$(":root").get(0).style.setProperty("--colorLight", localStorage.getItem("art_lightColor"));
+	$(":root").get(0).style.setProperty("--colorDark", localStorage.getItem("art_darkColor"));
+	$(":root").get(0).style.setProperty("--colorSafeLight", ensureSafeColor(localStorage.getItem("art_lightColor"), minBrightness, maxBrightness));
+	$(":root").get(0).style.setProperty("--colorSafeDark", ensureSafeColor(localStorage.getItem("art_darkColor"), minBrightness, maxBrightness));
+}
+initArtColors();

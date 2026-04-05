@@ -49,13 +49,6 @@ function setArt() {
 		artData = 'placeholder.png';
 	}
 
-	/*if(localStorage.getItem("setting_beatSaberDataMod") === "bsplus" && localStorage.getItem("setting_srxd_useRemoteArtURL") === "false" && artData !== null) {
-		//rootCSS().setProperty("--artFilters", "saturate(75%) contrast(67%) brightness(133%)");
-		rootCSS().setProperty("--artFilters", "saturate(75%) contrast(80%) brightness(133%)")
-	} else {
-		rootCSS().setProperty("--artFilters", "opacity(1)");
-	}*/
-
 	rootCSS().setProperty("--art-url", `url('${artData}')`);
 	$("#art, #artDoppleganger").attr("src", artData);
 
@@ -69,18 +62,18 @@ function setArt() {
 	let darkColor = activeMap.cover.colors.dark;
 	let lightColor = activeMap.cover.colors.light;
 
-	if(localStorage.getItem("setting_srxd_ensureColorIsBrightEnough") === "true") {
-		let minBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMinBrightness"))/100) * 255;
-		let maxBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMaxBrightness"))/100) * 255;
-
-		darkColor = ensureSafeColor(darkColor, minBrightness, maxBrightness);
-		lightColor = ensureSafeColor(lightColor, minBrightness, maxBrightness);
-	}
-
 	localStorage.setItem("art_darkColor", darkColor);
 	localStorage.setItem("art_lightColor", lightColor);
 	$(":root").get(0).style.setProperty("--colorDark", darkColor);
 	$(":root").get(0).style.setProperty("--colorLight", lightColor);
+
+	if(localStorage.getItem("setting_srxd_ensureColorIsBrightEnough") === "true") {
+		let minBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMinBrightness"))/100) * 255;
+		let maxBrightness = (parseFloat(localStorage.getItem("setting_srxd_colorMaxBrightness"))/100) * 255;
+
+		$(":root").get(0).style.setProperty("--colorSafeDark", ensureSafeColor(darkColor, minBrightness, maxBrightness));
+		$(":root").get(0).style.setProperty("--colorSafeLight", ensureSafeColor(lightColor, minBrightness, maxBrightness));
+	}
 }
 
 function setQR() {

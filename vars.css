@@ -188,7 +188,7 @@
 	--qrBorder: var(--qrBorderSize) var(--qrBorderStyle) var(--qrBorderColor);
 	--qrBorderActual: 0px;
 
-	--artFilters: saturate(75%) contrast(75%) brightness(133%);
+	--artFilters: none;
 
 	--healthColorForeground: var(--healthColorForegroundReflected);
 	--healthColorBackground: var(--healthColorBackgroundReflected);
